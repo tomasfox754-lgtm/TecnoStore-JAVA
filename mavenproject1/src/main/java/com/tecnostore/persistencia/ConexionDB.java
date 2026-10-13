@@ -13,7 +13,6 @@ public class ConexionDB {
 
         if (usuario == null || password == null) {
             throw new SQLException(
-                "Debes configurar DB_USER y DB_PASSWORD."
             );
         }
 

@@ -25,4 +25,13 @@ public class GestorCelulares {
 
     return celularDAO.actualizar(celular);
 }
+        public boolean eliminar(int id) throws SQLException {
+        if (id <= 0) {
+            throw new IllegalArgumentException(
+                    "El ID del celular debe ser mayor que cero."
+            );
+        }
+
+        return celularDAO.eliminar(id);
+    }
 }
