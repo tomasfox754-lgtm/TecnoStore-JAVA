@@ -16,4 +16,13 @@ public class GestorCelulares {
     public List<Celular> listar() throws SQLException {
         return celularDAO.listar();
     }
+    public boolean actualizar(Celular celular) throws SQLException {
+    if (celular.getId() <= 0) {
+        throw new IllegalArgumentException(
+                "El ID del celular debe ser mayor que cero."
+        );
+    }
+
+    return celularDAO.actualizar(celular);
+}
 }

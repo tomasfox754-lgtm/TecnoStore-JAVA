@@ -66,5 +66,27 @@ public class CelularDAO {
         }
 
         return celulares;
+        }
+        public boolean actualizar(Celular celular) throws SQLException {
+    String sql = """
+            UPDATE celulares
+            SET marca = ?, modelo = ?, sistema_operativo = ?,
+                gama = ?, precio = ?, stock = ?
+            WHERE id = ?
+            """;
+
+    try (Connection conexion = ConexionDB.conectar();
+         PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+
+        sentencia.setString(1, celular.getMarca());
+        sentencia.setString(2, celular.getModelo());
+        sentencia.setString(3, celular.getSistemaOperativo());
+        sentencia.setString(4, celular.getGama().name());
+        sentencia.setBigDecimal(5, celular.getPrecio());
+        sentencia.setInt(6, celular.getStock());
+        sentencia.setInt(7, celular.getId());
+
+        return sentencia.executeUpdate() > 0;
     }
 }
+    }
