@@ -14,14 +14,14 @@ public class Cliente {
         this.id = id;
         this.nombre = validarTexto(nombre, "nombre", 100);
         this.identificacion = validarTexto(
-                identificacion, "identificación", 30
+                identificacion, "identificacion", 30
         );
         this.correo = validarTexto(correo, "correo", 100);
-        this.telefono = validarTexto(telefono, "teléfono", 20);
+        this.telefono = validarTexto(telefono, "telefono", 20);
 
         if (!this.correo.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
             throw new IllegalArgumentException(
-                    "El formato del correo no es válido."
+                    "El formato del correo no es valido."
             );
         }
     }
@@ -39,7 +39,7 @@ public class Cliente {
 
         if (valor.length() > maximo) {
             throw new IllegalArgumentException(
-                    "El campo " + campo + " admite máximo "
+                    "El campo " + campo + " admite maximo "
                     + maximo + " caracteres."
             );
         }
@@ -70,8 +70,8 @@ public class Cliente {
     @Override
     public String toString() {
         return id + " | " + nombre
-                + " | Identificación: " + identificacion
+                + " | Identificacion: " + identificacion
                 + " | Correo: " + correo
-                + " | Teléfono: " + telefono;
+                + " | Telefono: " + telefono;
     }
 }

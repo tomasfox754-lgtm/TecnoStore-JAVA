@@ -4,6 +4,9 @@ import com.tecnostore.modelo.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDAO {
 
@@ -26,4 +29,33 @@ public class ClienteDAO {
             sentencia.executeUpdate();
         }
     }
+    public List<Cliente> listar() throws SQLException {
+    List<Cliente> clientes = new ArrayList<>();
+
+    String sql = """
+            SELECT id, nombre, identificacion, correo, telefono
+            FROM clientes
+            ORDER BY id
+            """;
+
+    try (Connection conexion = ConexionDB.conectar();
+         PreparedStatement sentencia = conexion.prepareStatement(sql);
+         ResultSet resultado = sentencia.executeQuery()) {
+
+        while (resultado.next()) {
+            Cliente cliente = new Cliente(
+                    resultado.getInt("id"),
+                    resultado.getString("nombre"),
+                    resultado.getString("identificacion"),
+                    resultado.getString("correo"),
+                    resultado.getString("telefono")
+            );
+
+            clientes.add(cliente);
+        }
+    }
+
+    return clientes;
 }
+}
+
